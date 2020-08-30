@@ -116,6 +116,25 @@ func TestParseIdentifier(t *testing.T) {
 	}
 }
 
+func TestParseString(t *testing.T) {
+	p := NewParser("set \"hallo\"")
+	token, err := p.Parse()
+	if err != nil {
+		t.Error(err)
+	}
+
+	ok, command := token.IsModuleAndCommand()
+	if !ok {
+		t.Error("not a correct module start")
+	}
+
+	fmt.Printf("%+v\n", command.ChildToken)
+
+	if len(command.ChildToken) != 2 {
+		t.Error("wrong token length")
+	}
+}
+
 func TestParsePropertyAccess(t *testing.T) {
 	p := NewParser("print hallo.test.k mm")
 	token, err := p.Parse()

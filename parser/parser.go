@@ -135,6 +135,8 @@ func (p *Parser) parseCommand() *Token {
 			token.addChild(p.parseBlock())
 		} else if p.current == '#' {
 			p.parseComment()
+		} else if p.current == '"' {
+			token.addChild(p.parseString())
 		} else if isNewLine(p.current) || p.current == '}' || p.current==0 {
 			break
 		} else {
@@ -240,6 +242,7 @@ func (p *Parser) parseString() *Token {
 	if p.current != '"' {
 		p.Error = errors.New("string '" + text + "' not closed")
 	}
+	p.next()
 	return NewToken(NumberToken, text)
 }
 

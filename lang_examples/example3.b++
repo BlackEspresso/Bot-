@@ -3,10 +3,13 @@ set @weekday.monday ["monday","mondays"]
 set @weekday.tuesday ["tuesday"]
 
 add state hello "says hello"
-
 set hello.trainingsdata [
     "hallo %{bot:@name:$name}"
     "test"
+]
+set hello.reponses [
+    "warum nennst du mich $name"
+    "mm $dfkg" # reponse cant define variable
 ]
 
 set hello.action {
@@ -17,11 +20,6 @@ set hello.action {
     }
     http["http://test.localhost.com?name=$name"];
 }
-
-set hello.reponses [
-    "warum nennst du mich $name"
-    "mm $dfkg" # reponse cant define variable
-]
 
 set hello.error {
     goto[state=error];
