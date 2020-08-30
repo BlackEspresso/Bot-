@@ -1,0 +1,38 @@
+Types:
+@weekday:
+    monday: ["Mondays", "Monday", "Monday"]
+    tuesday: ["Tuesdays"]
+
+@date:
+    date_german:  @regex[pattern:\d+\.\d+\.\d+,  default:31.10.2017]
+    date_english: @regex[pattern:/\d+\/\d+\/\d+/, default:10/31/2017]
+
+@time:
+    value: @number[start:1, end:10, default:3]
+    
+Intents:
+alarm.set:
+    Description: "sets an alarm"
+    Training:
+        "wake me up on %{Monday:@weekday:$weekday} at %{6:@time:$time}"
+        "Hello"
+    Action:
+        http[url:"http://localhost?$t=$time"]
+        print[textsum 1 2]
+        # regex_match[pattern:\d,input=]
+        # $test = [1:3,5:5,6:5]
+    Response:
+        "alarm set for $time.value"
+        "$action.body.retText"
+    Context:
+        output: alarm-set, 4
+    Error:
+        next[intent=error]
+
+alarm.set:
+    Context:
+        input: alarm-set
+
+error:
+    Response:
+        "sorry didnt get that"

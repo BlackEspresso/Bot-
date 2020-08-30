@@ -1,0 +1,30 @@
+type @weekday describe
+    monday: ["mondays","monday"]
+    tuesday: []
+end
+
+type @username describe
+    @regex[pattern:@"[\w_]+"]
+end
+
+intent hello describe
+    train:[
+        "Hello"
+        "Test",
+        "Hallo %{Chatbot:@name:$username}"
+    ]
+    action:
+        print["hello",$username, 3+8*5]
+        http[url:"https://test?username=$username"]
+    responses:[
+        "Guten tag"
+        "hallo $action.body.retText"
+        "hello from $username"
+    ]
+    error:
+        next[intent=error]
+end
+
+intent error describe
+    responses: fromFile["error_responses.txt"]
+end
