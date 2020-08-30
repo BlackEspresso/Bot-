@@ -1,4 +1,4 @@
-#Bot++
+# Bot++
 A language for writing chat bots.
 
 add a state, some training data and responses
