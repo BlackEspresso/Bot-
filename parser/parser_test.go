@@ -130,7 +130,7 @@ func TestParsePropertyAccess(t *testing.T) {
 
 	fmt.Printf("%+v\n", command.ChildToken)
 
-	if len(command.ChildToken) != 2 {
+	if len(command.ChildToken) != 3 {
 		t.Error("wrong token length")
 	}
 }

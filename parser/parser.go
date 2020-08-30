@@ -2,7 +2,6 @@ package parser
 
 import (
 	"errors"
-	"fmt"
 	"strconv"
 )
 
@@ -46,7 +45,9 @@ func NewToken(kind TokenKind, text string) *Token {
 }
 
 func NewParser(text string) *Parser {
-	return &Parser{[]rune(text), -1, 'm', nil}
+	runes := []rune(text)
+	runes = append(runes, rune(0))
+	return &Parser{runes, -1, 'm', nil}
 }
 
 func (p *Parser) hasNext() bool {
@@ -68,6 +69,19 @@ func (p *Parser) next() bool {
 }
 
 func (p *Parser) nextChar() bool {
+	for p.next() {
+		if !isWhiteSpace(p.current) {
+			return true
+		}
+	}
+	return false
+}
+
+func (p *Parser) eatWhitespace() bool {
+	if !isWhiteSpace(p.current) {
+		return true
+	}
+
 	for p.next() {
 		if !isWhiteSpace(p.current) {
 			return true
@@ -113,7 +127,6 @@ func (p *Parser) Parse() (*Token, error) {
 func (p *Parser) parseCommand() *Token {
 	token := NewToken(CommandToken, "")
 	for {
-		fmt.Println("parseCommand",string(p.current),p.position)
 		if isAlphabetical(p.current) {
 			token.addChild(p.parsePropertyAccess())
 		} else if p.current == '[' {
@@ -122,14 +135,14 @@ func (p *Parser) parseCommand() *Token {
 			token.addChild(p.parseBlock())
 		} else if p.current == '#' {
 			p.parseComment()
-		} else if isNewLine(p.current) || p.current == '}' {
+		} else if isNewLine(p.current) || p.current == '}' || p.current==0 {
 			break
 		} else {
 			p.Error = errors.New("unkown command " + string(p.current))
 			break
 		}
 
-		if !p.nextChar() {
+		if !p.eatWhitespace() {
 			break
 		}
 	}
@@ -140,20 +153,20 @@ func (p *Parser) parsePropertyAccess() *Token {
 	i1 := p.parseIdentifier()
 	list := []*Token{i1}
 
-	for p.current=='.' && p.next(){
-		list = append(list,p.parseIdentifier())
+	for p.current == '.' && p.next() {
+		list = append(list, p.parseIdentifier())
 	}
 
-	if len(list) == 1{
+	if len(list) == 1 {
 		return i1
 	}
 
-	token := NewToken(PropertyAccessToken,"")
-	for _,identifier := range list{
+	token := NewToken(PropertyAccessToken, "")
+	for _, identifier := range list {
 		token.addChild(identifier)
 
 		if len(token.ChildToken) == 2 {
-			nextToken := NewToken(PropertyAccessToken,"")
+			nextToken := NewToken(PropertyAccessToken, "")
 			nextToken.addChild(token)
 			token = nextToken
 		}
@@ -205,6 +218,7 @@ func (p *Parser) praseArray() *Token {
 		} else if p.current == ',' {
 			continue
 		} else if p.current == ']' {
+			p.next()
 			break
 		}
 
