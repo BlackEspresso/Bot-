@@ -62,6 +62,11 @@ hello
   This makes it possible to build complex conversations.
   e.g. ask for flights -> book flights -> list flights
 
+- a simple web interface to manage your bot(s):
+    - Easy Slack & MS Teams integration
+    - see bot logs (messages per second, failes pers seconds)
+    - log exceptions
+
 - data types for trainingdata
   add entities for easy text regcognition
   ```
