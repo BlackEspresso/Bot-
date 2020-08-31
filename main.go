@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"strings"
 
 	"github.com/BlackEspresso/Bot-/botscripting"
 )
@@ -30,6 +31,7 @@ func main() {
 	reader := bufio.NewReader(os.Stdin)
 	for {
 		input, _ := reader.ReadString('\n')
+		input = strings.TrimSpace(input)
 		if input == "exit" {
 			return
 		}

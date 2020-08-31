@@ -26,7 +26,8 @@ set time.responses [
 
 add state bookflight
 set bookflight.trainingdata [
-   "can you book me a flight?"
+   "book flight"
+   "can you book me a flight ?"
 ]
 set bookflight.responses [
     "where do you want to go?"
