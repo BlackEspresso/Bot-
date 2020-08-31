@@ -78,6 +78,25 @@ func TestParseCommand(t *testing.T) {
 	}
 }
 
+func TestParseCommands(t *testing.T) {
+	p := NewParser("set\nprint")
+	token, err := p.Parse()
+	if err != nil {
+		t.Error(err)
+	}
+
+	ok, _ := token.IsModuleAndCommand()
+	if !ok {
+		t.Error("not a correct module start")
+	}
+
+	fmt.Printf("%+v\n", token.ChildToken)
+
+	if len(token.ChildToken) != 2 {
+		t.Error("wrong token length")
+	}
+}
+
 func TestParseComment(t *testing.T) {
 	p := NewParser("set #test")
 	token, err := p.Parse()

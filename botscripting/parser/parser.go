@@ -137,10 +137,14 @@ func (p *Parser) parseCommand() *Token {
 			p.parseComment()
 		} else if p.current == '"' {
 			token.addChild(p.parseString())
-		} else if isNewLine(p.current) || p.current == '}' || p.current==0 {
-			break
-		} else {
+		}
+
+		if p.Error != nil {
 			p.Error = errors.New("unkown command " + string(p.current))
+			break
+		}
+
+		if isNewLine(p.current) || p.current == '}' || p.current == 0 {
 			break
 		}
 
@@ -167,7 +171,7 @@ func (p *Parser) parsePropertyAccess() *Token {
 	for x, identifier := range list {
 		token.addChild(identifier)
 
-		if len(token.ChildToken) == 2 &&  x != len(list)-1 {
+		if len(token.ChildToken) == 2 && x != len(list)-1 {
 			nextToken := NewToken(PropertyAccessToken, "")
 			nextToken.addChild(token)
 			token = nextToken
@@ -259,7 +263,7 @@ func (p *Parser) parseNumber() *Token {
 }
 
 func isNewLine(r rune) bool {
-	return r == 0x10 || r == 0x13
+	return r == 10 || r == 13
 }
 
 func isNumber(r rune) bool {

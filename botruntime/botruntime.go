@@ -54,12 +54,12 @@ func (s *State) MatchAgainstTraining(text string) int {
 func match(listA []string, listB []string) int {
 	lookup := map[string]bool{}
 	for _, x := range listA {
-		lookup[strings.ToLower(x)] = true
+		lookup[strings.ToLower(strings.TrimSpace(x))] = true
 	}
 
 	count := 0
 	for _, x := range listB {
-		if ok, _ := lookup[strings.ToLower(x)]; ok {
+		if _, ok := lookup[strings.ToLower(strings.TrimSpace(x))]; ok {
 			count++
 		}
 	}
@@ -113,6 +113,10 @@ func (bt *BotRuntime) ListenToBot() string {
 		state = bt.findStartState()
 	} else {
 		state = bt.findState()
+	}
+
+	if state == nil {
+		panic("state is null")
 	}
 
 	resp := state.Run(bt.context)

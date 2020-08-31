@@ -45,3 +45,25 @@ func TestSetTrainingData(t *testing.T) {
 		t.Error("no responses added")
 	}
 }
+
+func TestSetTrainingDataNewLine(t *testing.T) {
+	scriptRt := NewScriptRuntime()
+	err := RunScript(scriptRt, "add state hello")
+	if err != nil {
+		t.Error(err)
+	}
+
+	err = RunScript(scriptRt, "set hello.responses [\"a\",\n\"b\"]")
+	if err != nil {
+		t.Error(err)
+	}
+
+	if len(scriptRt.BotRuntime.GetStates()) == 0 {
+		t.Error("state not added")
+	}
+
+	state := scriptRt.BotRuntime.GetStates()[0]
+	if len(state.Reponses) != 2 {
+		t.Error("no responses added")
+	}
+}

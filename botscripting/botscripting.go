@@ -20,14 +20,14 @@ func NewScriptRuntime() *ScriptRuntime {
 	return script
 }
 
-func RunScript(scriptRuntime *ScriptRuntime, text string) error {
+func (runtime *ScriptRuntime) RunScript(text string) error {
 	parser := parser.NewParser(text)
 	ast, err := parser.Parse()
 	if err != nil {
 		return err
 	}
 
-	return evaluateAst(ast, scriptRuntime)
+	return evaluateAst(ast, runtime)
 }
 
 func evaluateAst(token *parser.Token, script *ScriptRuntime) error {
@@ -79,8 +79,11 @@ func (runtime *ScriptRuntime) evalSetCommand(command []*parser.Token) {
 		switch strings.TrimSpace(prop.Text) {
 		case "responses":
 			state.Reponses = evalStringArray(command[1])
+		case "trainingdata":
+			state.TrainingData = evalStringArray(command[1])
 		default:
-			panic("unkown property " + prop.Text + " on '" + name.Text + "'")
+			panic("unkown property " + prop.Text + " on '" + name.Text + "'\n" +
+				"valid ones: responses, trainingdata")
 		}
 	}
 }
@@ -91,7 +94,7 @@ func evalStringArray(token *parser.Token) []string {
 	}
 	arr := []string{}
 	for _, x := range token.ChildToken {
-		arr = append(arr, x.Text)
+		arr = append(arr, x.Text[1:len(x.Text)-1])
 	}
 	return arr
 }

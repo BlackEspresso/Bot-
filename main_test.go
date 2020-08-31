@@ -4,11 +4,12 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
+	"testing"
 
 	"github.com/BlackEspresso/Bot-/botscripting"
 )
 
-func main() {
+func TestBotRuntime(t *testing.T) {
 	filePath := flag.String("file", "main.b++", "path to b++ file")
 	data, err := ioutil.ReadFile(*filePath)
 	if err != nil {
@@ -23,14 +24,6 @@ func main() {
 		return
 	}
 
-	fmt.Println("Entering REPL, type exit to quit")
-	input := ""
-	for {
-		fmt.Scanln(&input)
-		if input == "exit" {
-			return
-		}
-		scripting.BotRuntime.SayToBot(input)
-		fmt.Println(scripting.BotRuntime.ListenToBot())
-	}
+	scripting.BotRuntime.SayToBot("hello")
+	fmt.Println(scripting.BotRuntime.ListenToBot())
 }

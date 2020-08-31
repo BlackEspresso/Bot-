@@ -1,0 +1,19 @@
+add state feeling
+set feeling.trainingdata [
+   "how are you?"
+   "how do you do?"
+]
+set feeling.responses [
+    "i'm fine thanks"
+    "everything ok"
+]
+
+add state greetings
+set greetings.trainingdata [
+   "hello"
+   "hi"
+]
+set greetings.responses [
+   "nice to meet you"
+   "hello"
+]
