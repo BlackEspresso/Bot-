@@ -67,6 +67,8 @@ hello
     - see bot logs (messages per second, failes pers seconds)
     - log exceptions
 
+- switch between edit and talk mode in bot++ console application. Live tune your bot while your're talking to it
+
 - data types for trainingdata
   add entities for easy text regcognition
   ```
