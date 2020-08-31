@@ -1,9 +1,6 @@
 # Bot++
-A language for writing chat bots.
+A language making it simple to write chat bots.
 
-simple define the state with trainingdata and responses
-Code Example for a bot wiht 2 states (feeling and greetings)
-each state has some learning data and some possible responses
 ```
 add state feeling
 set feeling.trainingdata [
@@ -28,6 +25,9 @@ set greetings.responses [
    "hallo"
 ]
 ```
+Define the state with trainingdata and responses. The example creates a bot with 2 states (feeling and greetings)
+each state has some learning data and some possible responses
+
 ## Get started
 edit main.b++ in editor and 
 > go run main.go
@@ -52,6 +52,10 @@ hello
     "hello, its a beautiful $timeNow.weekday"
   ]
   ```
+
+- improve string selection logic
+  - use fuzzy logic
+  - use machine learning ?
 
 - input/output tags
   tags conversations, if the user triggered the greeting state
