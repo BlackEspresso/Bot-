@@ -2,6 +2,8 @@
 A language for writing chat bots.
 
 simple define the state with trainingdata and responses
+Code Example for a bot wiht 2 states (feeling and greetings)
+each state has some learning data and some possible responses
 ```
 add state feeling
 set feeling.trainingdata [
@@ -26,10 +28,11 @@ set greetings.responses [
    "hallo"
 ]
 ```
-
-run main.go with
-
+## Get started
+edit main.b++ in editor and 
 > go run main.go
+
+Example output
 ```
 Entering REPL, type exit to quit
 who are you
@@ -39,6 +42,9 @@ hello
 ```
 
  ## Lookout
+
+- language specs
+
 - string interpolation (powershell like)
   ```
   set greetings.responses [
