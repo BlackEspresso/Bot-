@@ -164,10 +164,10 @@ func (p *Parser) parsePropertyAccess() *Token {
 	}
 
 	token := NewToken(PropertyAccessToken, "")
-	for _, identifier := range list {
+	for x, identifier := range list {
 		token.addChild(identifier)
 
-		if len(token.ChildToken) == 2 {
+		if len(token.ChildToken) == 2 &&  x != len(list)-1 {
 			nextToken := NewToken(PropertyAccessToken, "")
 			nextToken.addChild(token)
 			token = nextToken

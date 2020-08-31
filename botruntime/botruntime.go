@@ -90,6 +90,19 @@ func NewBotRuntime() *BotRuntime {
 	}
 }
 
+func (bt *BotRuntime) GetStates() []*State {
+	return bt.states
+}
+
+func (bt *BotRuntime) GetStateByName(name string) *State {
+	for _, state := range bt.states {
+		if state.Name == name {
+			return state
+		}
+	}
+	return nil
+}
+
 func (bt *BotRuntime) AddState(state *State) {
 	bt.states = append(bt.states, state)
 }
