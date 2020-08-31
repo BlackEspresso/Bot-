@@ -60,7 +60,7 @@ thanks
 
 - language specs
 
-- string interpolation (powershell like)
+- string interpolation with properties
   ```
   set greetings.responses [
     "hello from $name"
