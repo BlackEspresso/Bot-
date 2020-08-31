@@ -56,10 +56,9 @@ thanks
 
 (the flight state in this example is very limited and needs a lot of the [Lookout](#Lookout) features to work nicely )
 
- ## Lookout
+## Lookout
 
 - language specs
-
 - string interpolation with properties
   ```
   set greetings.responses [
@@ -67,54 +66,40 @@ thanks
     "hello, its a beautiful $timeNow.weekday"
   ]
   ```
-
 - improve string selection logic
-  - use fuzzy logic
-  - use machine learning ?
-
-- input/output tags
-  tags conversations, if the user triggered the greeting state
-  he gets the tag "polite_user"
+  use fuzzy logic, use machine learning, hidden markov
+- input / output tags
+  tags conversations, if the user triggered the greeting state he gets the tag "polite_user"
   ```
   set greetings.outputTag polite_user
   ```
-
   only if the user was polite enough to greet the charming context is considered as valid state (filtered by inputTag)
   ```
   set charming.inputTag polite-user
   ```
-
   This makes it possible to build complex conversations.
   e.g. ask for flights -> book flights -> list flights
-
 - a simple web interface to manage your bot(s):
     - Easy Slack & MS Teams integration
     - see bot logs (messages per second, failes pers seconds)
     - log exceptions
-
 - switch between edit and talk mode in bot++ console application. Live tune your bot while your're talking to it
-
 - data types for trainingdata
-  add entities for easy text regcognition
   ```
   add entity @weekday
   set @weekday.monday ["mondays","monday","mon"]
   set @weekday.tuesday ["tuesdays","tuesday","tues"]
-  
   set greetings.trainingdata [
       "set alarm on %{mondays:@weekday:$weekday}"
   ]
   ```
-  declares a variable $weekday of the type @weekday with the values:
-  monday, tuesday
-
+  declares a variable $weekday of the type @weekday with the values: monday, tuesday
 - string parsing for trainingdata prepares trainingdata to lookout for a username and sets the variable $username to bob if the user entered a similiar sentence
   ```
   set greetings.trainingdata [
       "hello my name is %{bob:@text:$username}"
   ]
   ```
-
 - actions on state
   e.g. a http action:
   ```
