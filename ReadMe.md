@@ -29,17 +29,31 @@ Define the state with trainingdata and responses. The example creates a bot with
 each state has some learning data and some possible responses
 
 ## Get started
-edit main.b++ in editor and 
+see main.b++ in editor and 
 > go run main.go
 
-Example output
+Example output for previous example
 ```
 Entering REPL, type exit to quit
-who are you
+how are you
 >>  everything ok
 hello
 >>  nice to meet you
 ```
+
+Example output for main.b++
+```
+Entering REPL, type exit to quit
+do you know the time
+>>  its $time (variables yet to come)
+book a flight
+>>  whats your destination?
+hamburg
+>>  ok i'll book it for tomorrow
+thanks
+>>  a pleasure
+```
+(the flight states needs the input/ouput tags feature to work in full grace :) )
 
  ## Lookout
 

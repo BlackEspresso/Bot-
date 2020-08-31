@@ -1,22 +1,55 @@
-add state feeling
-set feeling.trainingdata [
-   "how are you?"
-   "how do you do?"
-]
-set feeling.responses [
-    "i'm fine thanks"
-    "everything ok"
-]
-
 add state greetings
 set greetings.trainingdata [
    "hello"
    "hi"
    "hallo"
    "good morning"
+   "good evening"
+   "good afternoon"
 ]
 set greetings.responses [
    "nice to meet you"
-   "hello"
+   "hello, who can i help you?"
    "hallo"
+]
+
+add state time
+set time.trainingdata [
+   "what time is it"
+   "can you give me the time"
+]
+set time.responses [
+    "its 14:30"
+    "its 2:30 AM"
+    "its $time (variables yet to come)"
+]
+
+add state bookflight
+set bookflight.trainingdata [
+   "can you book me a flight?"
+]
+set bookflight.responses [
+    "where do you want to go?"
+    "whats your destination?"
+]
+
+add state bookflight_city
+set bookflight_city.trainingdata [
+   "hamburg"
+   "london"
+   "new york"
+   "san francisco"
+]
+set bookflight_city.responses [
+    "ok i'll book it for tomorrow"
+]
+
+add state thanks
+set thanks.trainingdata [
+   "thank you"
+   "thanks"
+]
+set thanks.responses [
+   "you're welcome"
+   "a pleasure"
 ]
