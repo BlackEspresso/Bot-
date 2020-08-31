@@ -25,8 +25,8 @@ set greetings.responses [
    "hallo"
 ]
 ```
-Define the state with trainingdata and responses. The example creates a bot with 2 states (feeling and greetings)
-each state has some learning data and some possible responses
+Define the state with "trainingdata" and possible "responses". The example creates a bot with 2 states (feeling and greetings)
+each state has some learning data and some possible replys. It looks limited now but with the tag-feature from [Lookout](#Lookout) complex conversations should't be problem.
 
 ## Get started
 see main.b++ in editor and 
@@ -53,7 +53,8 @@ hamburg
 thanks
 >>  a pleasure
 ```
-(the flight states needs the input/ouput tags feature to work in full grace :) )
+
+(the flight state in this example is very limited and needs a lot of the [Lookout](#Lookout) features to work nicely )
 
  ## Lookout
 
