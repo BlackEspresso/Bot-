@@ -24,6 +24,6 @@ func TestBotRuntime(t *testing.T) {
 		return
 	}
 
-	scripting.BotRuntime.SayToBot("hello")
+	scripting.BotRuntime.SayToBot("hello hello")
 	fmt.Println(scripting.BotRuntime.ListenToBot())
 }

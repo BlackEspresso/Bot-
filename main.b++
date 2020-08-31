@@ -12,8 +12,11 @@ add state greetings
 set greetings.trainingdata [
    "hello"
    "hi"
+   "hallo"
+   "good morning"
 ]
 set greetings.responses [
    "nice to meet you"
    "hello"
+   "hallo"
 ]

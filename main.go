@@ -1,9 +1,11 @@
 package main
 
 import (
+	"bufio"
 	"flag"
 	"fmt"
 	"io/ioutil"
+	"os"
 
 	"github.com/BlackEspresso/Bot-/botscripting"
 )
@@ -24,13 +26,14 @@ func main() {
 	}
 
 	fmt.Println("Entering REPL, type exit to quit")
-	input := ""
+
+	reader := bufio.NewReader(os.Stdin)
 	for {
-		fmt.Scanln(&input)
+		input, _ := reader.ReadString('\n')
 		if input == "exit" {
 			return
 		}
 		scripting.BotRuntime.SayToBot(input)
-		fmt.Println(scripting.BotRuntime.ListenToBot())
+		fmt.Println(">> ", scripting.BotRuntime.ListenToBot())
 	}
 }
